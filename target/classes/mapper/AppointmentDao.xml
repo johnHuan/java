@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.john.dao.AppointmentDao">
+    <insert id="insertAppointment" >
+        INSERT IGNORE INTO
+        appointment
+          (book_id, student_id)
+        VALUES
+          (#{bookId}, #{studentId})
+    </insert>
+
+    <select id="queryByKeyWithBook" resultType="appointment" >
+        SELECT
+            a.book_id, a.student_id, a.appoint_time
+        FROM
+            appointment a
+            INNER JOIN book b ON a.book_id = b.book_id
+        WHERE
+            a.book_id = #{bookId}
+            AND
+            a.student_id = #{studentId}
+    </select>
+</mapper>
